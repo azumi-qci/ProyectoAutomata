@@ -1,0 +1,104 @@
+﻿namespace ProyectoAutomata
+{
+    public static class Automaton
+    {
+        private const string INITIAL_STATE = "q0";
+        private const string END_STATE = "q4";
+
+        public static bool VerifyWithAutomaton(string automatonString)
+        {
+            string state = INITIAL_STATE;
+
+            foreach (char currentCharacter in automatonString)
+            {
+                switch (state)
+                {
+                    case "q0":
+                        if (currentCharacter == '1'
+                            || currentCharacter == '2'
+                            || currentCharacter == '3'
+                            || currentCharacter == '4'
+                            || currentCharacter == '5')
+                        {
+                            state = "q0";
+                        }
+                        else
+                        {
+                            state = "q1";
+                        }
+                        break;
+                    case "q1":
+                        if (currentCharacter == '1'
+                            || currentCharacter == '2'
+                            || currentCharacter == '3'
+                            || currentCharacter == '4'
+                            || currentCharacter == '5')
+                        {
+                            state = "q1";
+                        }
+                        else
+                        {
+                            state = "q2";
+                        }
+                        break;
+                    case "q2":
+                        if (currentCharacter == '1'
+                            || currentCharacter == '2'
+                            || currentCharacter == '3'
+                            || currentCharacter == '5')
+                        {
+                            state = "q2";
+                        }
+                        else if (currentCharacter == '6')
+                        {
+                            state = "q1";
+                        }
+                        else
+                        {
+                            state = "q3";
+                        }
+                        break;
+                    case "q3":
+                        if (currentCharacter == '1'
+                            || currentCharacter == '2'
+                            || currentCharacter == '3'
+                            || currentCharacter == '5'
+                            || currentCharacter == '6')
+                        {
+                            state = "q3";
+                        }
+                        else
+                        {
+                            state = "q4";
+                        }
+                        break;
+                    case "q4":
+                        if (currentCharacter == '1'
+                            || currentCharacter == '2'
+                            || currentCharacter == '3'
+                            || currentCharacter == '5'
+                            || currentCharacter == '6')
+                        {
+                            state = "q4";
+                        }
+                        else
+                        {
+                            state = "q3";
+                        }
+                        break;
+                    default:
+                        Console.WriteLine("\nSe ha llegado a un estado inválido");
+                        break;
+                }
+            }
+
+            // Check last state
+            if (state == END_STATE)
+            {
+                return true;
+            }
+
+            return false;
+        }
+    }
+}
