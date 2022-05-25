@@ -1,24 +1,25 @@
 ﻿namespace ProyectoAutomata
 {
-    public static class Automaton
+    public class Automaton
     {
         private const string INITIAL_STATE = "q0";
-        private const string END_STATE = "q4";
+        private const string END_STATE = "q2";
 
-        public static bool VerifyWithAutomaton(string automatonString)
+        private string state;
+
+        public Automaton()
         {
-            string state = INITIAL_STATE;
+            state = INITIAL_STATE;
+        }
 
+        public Tuple<string, bool> WalkWithAutomaton(string automatonString)
+        {
             foreach (char currentCharacter in automatonString)
             {
                 switch (state)
                 {
                     case "q0":
-                        if (currentCharacter == '1'
-                            || currentCharacter == '2'
-                            || currentCharacter == '3'
-                            || currentCharacter == '4'
-                            || currentCharacter == '5')
+                        if (currentCharacter == '1' || currentCharacter == '3' || currentCharacter == '5')
                         {
                             state = "q0";
                         }
@@ -28,11 +29,7 @@
                         }
                         break;
                     case "q1":
-                        if (currentCharacter == '1'
-                            || currentCharacter == '2'
-                            || currentCharacter == '3'
-                            || currentCharacter == '4'
-                            || currentCharacter == '5')
+                        if (currentCharacter == '2' || currentCharacter == '4' || currentCharacter == '6')
                         {
                             state = "q1";
                         }
@@ -42,48 +39,13 @@
                         }
                         break;
                     case "q2":
-                        if (currentCharacter == '1'
-                            || currentCharacter == '2'
-                            || currentCharacter == '3'
-                            || currentCharacter == '5')
+                        if (currentCharacter == '1' || currentCharacter == '3' || currentCharacter == '5')
                         {
                             state = "q2";
                         }
-                        else if (currentCharacter == '6')
+                        else
                         {
                             state = "q1";
-                        }
-                        else
-                        {
-                            state = "q3";
-                        }
-                        break;
-                    case "q3":
-                        if (currentCharacter == '1'
-                            || currentCharacter == '2'
-                            || currentCharacter == '3'
-                            || currentCharacter == '5'
-                            || currentCharacter == '6')
-                        {
-                            state = "q3";
-                        }
-                        else
-                        {
-                            state = "q4";
-                        }
-                        break;
-                    case "q4":
-                        if (currentCharacter == '1'
-                            || currentCharacter == '2'
-                            || currentCharacter == '3'
-                            || currentCharacter == '5'
-                            || currentCharacter == '6')
-                        {
-                            state = "q4";
-                        }
-                        else
-                        {
-                            state = "q3";
                         }
                         break;
                     default:
@@ -95,10 +57,10 @@
             // Check last state
             if (state == END_STATE)
             {
-                return true;
+                return new Tuple<string, bool>(state, true);
             }
 
-            return false;
+            return new Tuple<string, bool>(state, false);
         }
     }
 }
